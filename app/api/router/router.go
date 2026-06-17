@@ -23,4 +23,23 @@ func RegisterPath(
 	userEndpoint := e.Group("/users")
 	userEndpoint.POST("/register", ctrlUser.Register)
 	userEndpoint.POST("/login", ctrlUser.Login)
+
+	// dashboard endpoint -- no need login
+	// GET /jobs
+	// GET /freelancer
+
+	// client endpoint
+	// POST /jobs
+	// GET /my/jobs
+	// GET /jobs/:id/proposals
+	// POST /proposals/:id/accept -- PATCH aja kayaknya
+	// POST /projects/:id/pay
+
+	// freelancer endpoint
+	// GET /jobs
+	// GET /jobs/:id
+	// POST /jobs/:id/proposals
+	// GET /my/projects
+	// PATCH /projects/:id/submit
+
 }

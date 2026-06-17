@@ -5,7 +5,8 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(20) NOT NULL CHECK (role IN ('CLIENT', 'FREELANCER')),
+    profile TEXT,
+    role VARCHAR(20) NOT NULL CHECK (role IN ('client', 'freelancer')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -19,8 +20,8 @@ CREATE TABLE jobs (
     title VARCHAR(255) NOT NULL,
     description TEXT,
     budget NUMERIC(12,2) NOT NULL,
-    status VARCHAR(20) NOT NULL DEFAULT 'OPEN'
-        CHECK (status IN ('OPEN', 'CLOSED')),
+    status VARCHAR(20) NOT NULL DEFAULT 'open'
+        CHECK (status IN ('open', 'closed')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -36,8 +37,8 @@ CREATE TABLE proposals (
         ON DELETE CASCADE,
     cover_letter TEXT,
     bid_amount NUMERIC(12,2) NOT NULL,
-    status VARCHAR(20) NOT NULL DEFAULT 'PENDING'
-        CHECK (status IN ('PENDING', 'ACCEPTED', 'REJECTED')),
+    status VARCHAR(20) NOT NULL DEFAULT 'pending'
+        CHECK (status IN ('pending', 'accepted', 'rejected')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -55,8 +56,8 @@ CREATE TABLE projects (
     freelancer_id INT NOT NULL,
     	FOREIGN KEY (freelancer_id)
         REFERENCES users(id),
-    status VARCHAR(20) NOT NULL DEFAULT 'IN_PROGRESS'
-        CHECK (status IN ('IN_PROGRESS','SUBMITTED','PAID','COMPLETED')),
+    status VARCHAR(20) NOT NULL DEFAULT 'in_progress'
+        CHECK (status IN ('in_progress','submitted','paid','completed')),
     submitted_at TIMESTAMP NULL,
     completed_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -70,8 +71,8 @@ CREATE TABLE payments (
     amount NUMERIC(12,2) NOT NULL,
     midtrans_order_id VARCHAR(255),
     transaction_id VARCHAR(255),
-    status VARCHAR(20) NOT NULL DEFAULT 'PENDING'
-        CHECK (status IN ('PENDING', 'SUCCESS', 'FAILED')),
+    status VARCHAR(20) NOT NULL DEFAULT 'pending'
+        CHECK (status IN ('pending', 'success', 'failed')),
     paid_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -80,26 +81,30 @@ INSERT INTO users (
     name,
     email,
     password,
+    profile,
     role
 )
 VALUES (
     'Nunin Client',
     'nunin@mail.com',
     '$2a$10$iYfjQ73kvTKPFrygFFS5WOtHP7HUhNR5SRGMhEfXBjjgV.MzcrI/2', --passwordclient
-    'CLIENT'
+    'CEO of Cat Food Product',
+    'client'
 );
 
 INSERT INTO users (
     name,
     email,
     password,
+    profile,
     role
 )
 VALUES (
     'Ula Freelancer',
     'ula@mail.com',
     '$2a$10$GZJVN5qHPp.Hqb81cZtOlO1HRoXtjVtEUkHebFVc.EM8iEV92l7rq', --passwordfreelancer
-    'FREELANCER'
+    'Backend specialist',
+    'freelancer'
 );
 
 INSERT INTO jobs (
@@ -114,7 +119,7 @@ VALUES (
     'Build REST API with Golang',
     'Need backend developer for API project',
     5000000,
-    'OPEN'
+    'open'
 );
 
 INSERT INTO proposals (
@@ -129,7 +134,7 @@ VALUES (
     2,
     'Saya berpengalaman menggunakan Golang dan PostgreSQL.',
     4500000,
-    'ACCEPTED'
+    'accepted'
 );
 
 INSERT INTO projects (
@@ -144,5 +149,5 @@ VALUES (
     1,
     1,
     2,
-    'IN_PROGRESS'
+    'in_progress'
 );
