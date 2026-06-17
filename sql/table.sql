@@ -97,7 +97,7 @@ INSERT INTO users (
 )
 VALUES (
     'Ula Freelancer',
-    'ula@example.com',
+    'ula@mail.com',
     '$2a$10$GZJVN5qHPp.Hqb81cZtOlO1HRoXtjVtEUkHebFVc.EM8iEV92l7rq', --passwordfreelancer
     'FREELANCER'
 );
