@@ -25,19 +25,17 @@ func RegisterPath(
 	// })
 
 	// FREE ROUTE
+	// dashboard endpoint -- no need login
 	e.GET("/freelancers", ctrlUser.GetAllFreelancer)
 	e.GET("/jobs", ctrlJob.GetAllJobs)
+	e.POST("/webhook", ctrlJob.WebhookHandler)
 
 	userEndpoint := e.Group("/users")
 	userEndpoint.POST("/register", ctrlUser.Register)
 	userEndpoint.POST("/login", ctrlUser.Login)
 
-	// dashboard endpoint -- no need login
 	jobEndpoint := e.Group("/jobs", jwtMiddleware)
 	jobEndpoint.POST("", ctrlJob.CreateJob, clientAccess)
-
-	// GET /jobs
-	// GET /freelancer
 
 	// client endpoint
 	// POST /jobs
