@@ -25,12 +25,16 @@ func (r *GormRepository) GetAllJobs(input string) (jobs []job.Job, err error) {
 }
 
 func (r *GormRepository) GetAllJobByUser(userId int) (jobs []job.Job, err error) {
-	err = r.DB.WithContext(context.Background()).Where("client_id = ?", userId).Find(&jobs).Error
+	err = r.DB.WithContext(context.Background()).
+		Preload("Client").
+		Where("client_id = ?", userId).Find(&jobs).Error
 	return jobs, err
 }
 
 func (r *GormRepository) GetJobById(jobId int) (job job.Job, err error) {
-	err = r.DB.WithContext(context.Background()).Where("id = ?", jobId).First(&job).Error
+	err = r.DB.WithContext(context.Background()).
+		Preload("Client").
+		Where("id = ?", jobId).First(&job).Error
 	return job, err
 }
 

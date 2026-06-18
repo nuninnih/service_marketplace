@@ -10,6 +10,7 @@ type service struct {
 type Service interface {
 	GetAllJobs(input string) (jobs []Job, err error)
 	CreateJob(input Job) (job Job, err error)
+	GetMyJob(userId int) (job []Job, err error)
 }
 
 func NewService(
@@ -35,4 +36,8 @@ func (s *service) CreateJob(input Job) (job Job, err error) {
 	}
 
 	return created, err
+}
+
+func (s *service) GetMyJob(userId int) (job []Job, err error) {
+	return s.repo.GetAllJobByUser(userId)
 }

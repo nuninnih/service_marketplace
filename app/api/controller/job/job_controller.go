@@ -133,6 +133,36 @@ func (ctrl *Controller) CreateJob(c echo.Context) error {
 	return common.CompleteSuccessResponse(c, http.StatusCreated, response)
 }
 
+func (ctrl *Controller) GetMyJob(c echo.Context) error {
+	id := c.Get("id").(int)
+
+	myJob, err := ctrl.jobSvc.GetMyJob(id)
+	if err != nil {
+		fmt.Println(err)
+
+		if strings.Contains(err.Error(), "Exist") {
+			return common.CompleteErrorResponse(c, http.StatusBadRequest, err.Error())
+		}
+		return common.CompleteErrorResponse(c, http.StatusInternalServerError, "Failed Processing Request")
+	}
+
+	var response = []allJob{}
+
+	for _, j := range myJob {
+		response = append(response, allJob{
+			ID:          j.ID,
+			Title:       j.Title,
+			Description: j.Description,
+			Client:      j.Client.Name,
+			Budget:      j.Budget,
+			Status:      j.Status,
+			CreatedAt:   j.CreatedAt,
+		})
+	}
+
+	return common.CompleteSuccessResponse(c, http.StatusOK, response)
+}
+
 type MidtransNotification struct {
 	OrderID           string `json:"order_id"`
 	StatusCode        string `json:"status_code"`

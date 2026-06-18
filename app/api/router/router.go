@@ -35,19 +35,31 @@ func RegisterPath(
 	userEndpoint.POST("/login", ctrlUser.Login)
 
 	jobEndpoint := e.Group("/jobs", jwtMiddleware)
-	jobEndpoint.POST("", ctrlJob.CreateJob, clientAccess)
+	jobEndpoint.POST("", ctrlJob.CreateJob, clientAccess)  //client
+	jobEndpoint.GET("/my", ctrlJob.GetMyJob, clientAccess) //client
+	// jobEndpoint.GET("/:id/proposals")                     //client
+	// jobEndpoint.POST("/:id/proposals")                    //freelancer
+	// jobEndpoint.GET("/:id")                               //freelancer
+
+	// proposalEndpoint := e.Group("/proposals", jwtMiddleware)
+	// proposalEndpoint.PATCH("/:id/accept") //client
+
+	// projectEndpoint := e.Group("/projects", jwtMiddleware)
+	// projectEndpoint.GET("/my")           // freelancer
+	// projectEndpoint.PATCH("/:id/submit") // freelancer
+	// projectEndpoint.POST("/:id/pay")     //freelancer
 
 	// client endpoint
-	// POST /jobs
-	// GET /my/jobs
-	// GET /jobs/:id/proposals
-	// POST /proposals/:id/accept -- PATCH aja kayaknya
+	// POST /jobs X
+	// GET /jobs/my X
+	// GET /jobs/:id/proposals X
+	// POST /proposals/:id/accept -- PATCH aja kayaknya X
 	// POST /projects/:id/pay
 
 	// freelancer endpoint
 	// GET /jobs
-	// GET /jobs/:id
-	// POST /jobs/:id/proposals
+	// GET /jobs/:id X
+	// POST /jobs/:id/proposals X
 	// GET /my/projects
 	// PATCH /projects/:id/submit
 
