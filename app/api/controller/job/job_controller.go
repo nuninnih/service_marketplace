@@ -140,9 +140,14 @@ func (ctrl *Controller) GetMyJob(c echo.Context) error {
 	if err != nil {
 		fmt.Println(err)
 
-		if strings.Contains(err.Error(), "Exist") {
-			return common.CompleteErrorResponse(c, http.StatusBadRequest, err.Error())
+		if strings.Contains(err.Error(), "Not Found") {
+			return common.CompleteErrorResponse(c, http.StatusNotFound, err.Error())
 		}
+
+		if strings.Contains(err.Error(), "Forbidden") {
+			return common.CompleteErrorResponse(c, http.StatusForbidden, err.Error())
+		}
+
 		return common.CompleteErrorResponse(c, http.StatusInternalServerError, "Failed Processing Request")
 	}
 

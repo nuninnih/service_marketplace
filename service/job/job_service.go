@@ -1,6 +1,8 @@
 package job
 
-import "log/slog"
+import (
+	"log/slog"
+)
 
 type service struct {
 	logger *slog.Logger
@@ -9,6 +11,7 @@ type service struct {
 
 type Service interface {
 	GetAllJobs(input string) (jobs []Job, err error)
+	GetJobById(id int) (jobs Job, err error)
 	CreateJob(input Job) (job Job, err error)
 	GetMyJob(userId int) (job []Job, err error)
 }
@@ -25,6 +28,10 @@ func NewService(
 
 func (s *service) GetAllJobs(input string) (jobs []Job, err error) {
 	return s.repo.GetAllJobs(input)
+}
+
+func (s *service) GetJobById(id int) (jobs Job, err error) {
+	return s.repo.GetJobById(id)
 }
 
 func (s *service) CreateJob(input Job) (job Job, err error) {

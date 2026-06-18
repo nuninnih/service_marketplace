@@ -1,6 +1,8 @@
 package proposal
 
-import "time"
+import (
+	"time"
+)
 
 type Proposal struct {
 	ID           int
@@ -10,4 +12,20 @@ type Proposal struct {
 	BidAmount    int
 	Status       string
 	CreatedAt    time.Time
+}
+
+type JobProposalUser struct {
+	ID           int
+	JobID        int
+	FreelancerID int
+	CoverLetter  string
+	BidAmount    float64
+	Status       string
+	CreatedAt    time.Time
+
+	JobTitle       string
+	JobDescription string
+
+	FreelancerName  string
+	FreelancerEmail string
 }

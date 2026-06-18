@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/nuninnih/service_marketplace/app/api/controller/job"
+	"github.com/nuninnih/service_marketplace/app/api/controller/proposal"
 	"github.com/nuninnih/service_marketplace/app/api/controller/user"
 	"github.com/nuninnih/service_marketplace/app/api/middleware"
 )
@@ -12,6 +13,7 @@ func RegisterPath(
 	jwtSecret string,
 	ctrlUser *user.Controller,
 	ctrlJob *job.Controller,
+	ctrlProp *proposal.Controller,
 
 ) {
 	jwtMiddleware := middleware.JWTMiddleware(jwtSecret)
@@ -20,9 +22,9 @@ func RegisterPath(
 		"client": true,
 	})
 
-	// freelancerAccess := middleware.ACLMiddleware(map[string]bool{
-	// 	"freelancer": true,
-	// })
+	freelancerAccess := middleware.ACLMiddleware(map[string]bool{
+		"freelancer": true,
+	})
 
 	// FREE ROUTE
 	// dashboard endpoint -- no need login
@@ -35,14 +37,14 @@ func RegisterPath(
 	userEndpoint.POST("/login", ctrlUser.Login)
 
 	jobEndpoint := e.Group("/jobs", jwtMiddleware)
-	jobEndpoint.POST("", ctrlJob.CreateJob, clientAccess)  //client
-	jobEndpoint.GET("/my", ctrlJob.GetMyJob, clientAccess) //client
-	// jobEndpoint.GET("/:id/proposals")                     //client
-	// jobEndpoint.POST("/:id/proposals")                    //freelancer
+	jobEndpoint.POST("", ctrlJob.CreateJob, clientAccess)                           //client
+	jobEndpoint.GET("/my", ctrlJob.GetMyJob, clientAccess)                          //client
+	jobEndpoint.GET("/:id/proposals", ctrlProp.GetJobProposalPerUser, clientAccess) //client
+	jobEndpoint.POST("/:id/proposals", ctrlProp.CreateProposal, freelancerAccess)   //freelancer
 	// jobEndpoint.GET("/:id")                               //freelancer
 
-	// proposalEndpoint := e.Group("/proposals", jwtMiddleware)
-	// proposalEndpoint.PATCH("/:id/accept") //client
+	proposalEndpoint := e.Group("/proposals", jwtMiddleware)
+	proposalEndpoint.PATCH("/:id/accept", ctrlProp.UpdateStatusProposal) //client
 
 	// projectEndpoint := e.Group("/projects", jwtMiddleware)
 	// projectEndpoint.GET("/my")           // freelancer
