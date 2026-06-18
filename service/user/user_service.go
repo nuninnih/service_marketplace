@@ -18,7 +18,7 @@ type service struct {
 
 type Service interface {
 	Register(user User) (u User, err error)
-	generateToken(jwtSign string, id int) (signedToken string, err error)
+	generateToken(jwtSign string, id int, role string) (signedToken string, err error)
 	Login(email string, password string) (accessToken string, err error)
 	GetUser(id int) (user User, err error)
 	GetAllFreelancer(desc string) (user []User, err error)
@@ -66,15 +66,17 @@ func (s *service) Register(user User) (u User, err error) {
 	return user, nil
 }
 
-func (s *service) generateToken(jwtSign string, id int) (signedToken string, err error) {
+func (s *service) generateToken(jwtSign string, id int, role string) (signedToken string, err error) {
 	type jwtClaims struct {
-		ID int `json:"id"`
+		ID   int    `json:"id"`
+		Role string `json:"role"`
 		jwt.RegisteredClaims
 	}
 
 	timeNow := time.Now()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwtClaims{
-		ID: id,
+		ID:   id,
+		Role: role,
 		RegisteredClaims: jwt.RegisteredClaims{
 			IssuedAt:  jwt.NewNumericDate(timeNow),
 			ExpiresAt: jwt.NewNumericDate(timeNow.Add(time.Hour * 24)),
@@ -106,7 +108,7 @@ func (s *service) Login(email string, password string) (accessToken string, err 
 		return "", errSvc.ErrInvalidEmailPassword
 	}
 
-	token, err := s.generateToken(os.Getenv("JWT_SECRET"), getUser.ID)
+	token, err := s.generateToken(os.Getenv("JWT_SECRET"), getUser.ID, getUser.Role)
 	if err != nil {
 		s.logger.Error("SVC LOGIN", slog.Any("Generate Token", err.Error()))
 		return "", errSvc.ErrGenerateToken

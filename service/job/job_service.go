@@ -9,6 +9,7 @@ type service struct {
 
 type Service interface {
 	GetAllJobs(input string) (jobs []Job, err error)
+	CreateJob(input Job) (job Job, err error)
 }
 
 func NewService(
@@ -23,4 +24,15 @@ func NewService(
 
 func (s *service) GetAllJobs(input string) (jobs []Job, err error) {
 	return s.repo.GetAllJobs(input)
+}
+
+func (s *service) CreateJob(input Job) (job Job, err error) {
+	input.Status = "open"
+	created, err := s.repo.CreateJob(input)
+	if err != nil {
+		s.logger.Error("SVC CREATE JOB", slog.Any("Create JOB", err))
+		return
+	}
+
+	return created, err
 }
