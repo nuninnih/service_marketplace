@@ -30,3 +30,8 @@ func (r *GormRepository) GetById(id int) (user user.User, err error) {
 	r.DB.WithContext(context.Background()).Where("id = ?", id).First(&user)
 	return user, err
 }
+
+func (r *GormRepository) GetAllFreelancer(desc string) (user []user.User, err error) {
+	r.DB.WithContext(context.Background()).Where("profile ILIKE ? AND role = 'freelancer' ", "%"+desc+"%").Find(&user)
+	return user, err
+}

@@ -133,3 +133,35 @@ func (ctrl *Controller) GetUser(c echo.Context) error {
 
 	return common.CompleteSuccessResponse(c, http.StatusOK, response)
 }
+
+type freelancerResponse struct {
+	Name    string
+	Email   string
+	Profile string
+}
+
+func (ctrl *Controller) GetAllFreelancer(c echo.Context) error {
+	desc := ""
+	queryDesc := c.QueryParam("desc")
+	if queryDesc != "" {
+		desc = queryDesc
+	}
+
+	freelancers, err := ctrl.userSvc.GetAllFreelancer(desc)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]interface{}{"message": "Failed Processing Request"})
+	}
+
+	var response = []freelancerResponse{}
+
+	for _, f := range freelancers {
+		response = append(response, freelancerResponse{
+			Name:    f.Name,
+			Email:   f.Email,
+			Profile: f.Profile,
+		})
+	}
+
+	return common.CompleteSuccessResponse(c, http.StatusOK, response)
+
+}

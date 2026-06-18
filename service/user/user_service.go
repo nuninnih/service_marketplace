@@ -21,6 +21,7 @@ type Service interface {
 	generateToken(jwtSign string, id int) (signedToken string, err error)
 	Login(email string, password string) (accessToken string, err error)
 	GetUser(id int) (user User, err error)
+	GetAllFreelancer(desc string) (user []User, err error)
 }
 
 func NewService(
@@ -128,4 +129,8 @@ func (s *service) GetUser(id int) (user User, err error) {
 	}
 
 	return getUser, err
+}
+
+func (s *service) GetAllFreelancer(desc string) (user []User, err error) {
+	return s.repo.GetAllFreelancer(desc)
 }

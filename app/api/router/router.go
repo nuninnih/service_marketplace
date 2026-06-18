@@ -22,6 +22,8 @@ func RegisterPath(
 	// 	"FREELANCER": true,
 	// })
 
+	e.GET("/freelancers", ctrlUser.GetAllFreelancer)
+
 	userEndpoint := e.Group("/users")
 	userEndpoint.POST("/register", ctrlUser.Register)
 	userEndpoint.POST("/login", ctrlUser.Login)
@@ -29,6 +31,7 @@ func RegisterPath(
 	// dashboard endpoint -- no need login
 	jobEndpoint := e.Group("/jobs")
 	jobEndpoint.GET("", ctrlJob.GetAllJobs)
+
 	// GET /jobs
 	// GET /freelancer
 

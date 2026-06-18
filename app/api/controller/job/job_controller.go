@@ -40,18 +40,18 @@ type jobResponse struct {
 }
 
 func (ctrl *Controller) GetAllJobs(c echo.Context) error {
-	search := ""
-	querySearch := c.QueryParam("search")
-	if querySearch != "" {
-		search = querySearch
+	desc := ""
+	queryDesc := c.QueryParam("desc")
+	if queryDesc != "" {
+		desc = queryDesc
 	}
 
-	jobs, err := ctrl.jobSvc.GetAllJobs(search)
+	jobs, err := ctrl.jobSvc.GetAllJobs(desc)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]interface{}{"message": "Failed Processing Request"})
 	}
 
-	var response []jobResponse
+	var response = []jobResponse{}
 
 	for _, j := range jobs {
 		response = append(response, jobResponse{
