@@ -4,7 +4,6 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
-	"log"
 	"log/slog"
 	"net/http"
 	"os"
@@ -162,31 +161,31 @@ func (ctrl *Controller) WebhookHandler(c echo.Context) error {
 
 	// 4. Verify the signature
 	if generatedSignature != payload.SignatureKey {
-		log.Println("⚠️ Invalid signature detected! Potential spoofing.")
+		fmt.Println("⚠️ Invalid signature detected! Potential spoofing.")
 		// Return 403 Forbidden
 		return c.JSON(http.StatusForbidden, map[string]string{"message": "Invalid signature"})
 	}
 
 	// 5. Process the transaction based on the status
-	log.Printf("✅ Signature verified for Order ID: %s\n", payload.OrderID)
+	fmt.Printf("✅ Signature verified for Order ID: %s\n", payload.OrderID)
 
 	switch payload.TransactionStatus {
 	case "capture":
 		if payload.FraudStatus == "challenge" {
-			log.Println("Payment challenged by FDS (Fraud Detection System).")
+			fmt.Println("Payment challenged by FDS (Fraud Detection System).")
 			// Update DB: status = 'challenge'
 		} else if payload.FraudStatus == "accept" {
-			log.Println("Payment accepted.")
+			fmt.Println("Payment accepted.")
 			// Update DB: status = 'success'
 		}
 	case "settlement":
-		log.Println("Payment settled successfully!")
+		fmt.Println("Payment settled successfully!")
 		// Update DB: status = 'success'
 	case "cancel", "deny", "expire":
-		log.Printf("Payment failed/expired. Status: %s\n", payload.TransactionStatus)
+		fmt.Printf("Payment failed/expired. Status: %s\n", payload.TransactionStatus)
 		// Update DB: status = 'failed'
 	case "pending":
-		log.Println("Payment is pending (awaiting customer action).")
+		fmt.Println("Payment is pending (awaiting customer action).")
 		// Update DB: status = 'pending'
 	}
 
