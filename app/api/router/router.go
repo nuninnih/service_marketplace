@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/nuninnih/service_marketplace/app/api/controller/job"
 	"github.com/nuninnih/service_marketplace/app/api/controller/user"
 )
 
@@ -9,6 +10,7 @@ func RegisterPath(
 	e *echo.Echo,
 	jwtSecret string,
 	ctrlUser *user.Controller,
+	ctrlJob *job.Controller,
 
 ) {
 	// jwtMiddleware := middleware.JWTMiddleware(jwtSecret)
@@ -25,6 +27,8 @@ func RegisterPath(
 	userEndpoint.POST("/login", ctrlUser.Login)
 
 	// dashboard endpoint -- no need login
+	jobEndpoint := e.Group("/jobs")
+	jobEndpoint.GET("", ctrlJob.GetAllJobs)
 	// GET /jobs
 	// GET /freelancer
 

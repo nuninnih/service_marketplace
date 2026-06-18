@@ -8,6 +8,7 @@ type service struct {
 }
 
 type Service interface {
+	GetAllJobs(input string) (jobs []Job, err error)
 }
 
 func NewService(
@@ -18,4 +19,8 @@ func NewService(
 		logger: logger,
 		repo:   repo,
 	}
+}
+
+func (s *service) GetAllJobs(input string) (jobs []Job, err error) {
+	return s.repo.GetAllJobs(input)
 }

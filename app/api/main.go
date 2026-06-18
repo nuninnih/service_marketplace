@@ -11,9 +11,12 @@ import (
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	jobCTRL "github.com/nuninnih/service_marketplace/app/api/controller/job"
 	userCTRL "github.com/nuninnih/service_marketplace/app/api/controller/user"
 	"github.com/nuninnih/service_marketplace/app/api/router"
+	jobRepo "github.com/nuninnih/service_marketplace/repository/job"
 	userRepo "github.com/nuninnih/service_marketplace/repository/user"
+	jobSvc "github.com/nuninnih/service_marketplace/service/job"
 	userSvc "github.com/nuninnih/service_marketplace/service/user"
 	"github.com/nuninnih/service_marketplace/util/db"
 )
@@ -71,10 +74,15 @@ func main() {
 	userService := userSvc.NewService(logger, userRepository)
 	userController := userCTRL.NewController(logger, userService)
 
+	jobRepository := jobRepo.NewGormRepository(db)
+	jobService := jobSvc.NewService(logger, jobRepository)
+	jobController := jobCTRL.NewController(logger, jobService)
+
 	router.RegisterPath(
 		e,
 		os.Getenv("JWT_SECRET"),
 		userController,
+		jobController,
 	)
 
 	logger.Info("http server started on :" + os.Getenv("PORT"))
