@@ -16,6 +16,7 @@ import (
 	userCTRL "github.com/nuninnih/service_marketplace/app/api/controller/user"
 	"github.com/nuninnih/service_marketplace/app/api/router"
 	jobRepo "github.com/nuninnih/service_marketplace/repository/job"
+	projectRepo "github.com/nuninnih/service_marketplace/repository/project"
 	proposalRepo "github.com/nuninnih/service_marketplace/repository/proposal"
 	userRepo "github.com/nuninnih/service_marketplace/repository/user"
 	jobSvc "github.com/nuninnih/service_marketplace/service/job"
@@ -81,8 +82,10 @@ func main() {
 	jobService := jobSvc.NewService(logger, jobRepository)
 	jobController := jobCTRL.NewController(logger, jobService)
 
+	projectRepository := projectRepo.NewGormRepository(db)
+
 	proposalRepository := proposalRepo.NewGormRepository(db)
-	proposalService := proposalSvc.NewService(logger, proposalRepository, jobRepository)
+	proposalService := proposalSvc.NewService(logger, proposalRepository, jobRepository, projectRepository)
 	proposalController := proposalCRTL.NewController(logger, proposalService)
 
 	router.RegisterPath(

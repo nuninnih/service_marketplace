@@ -49,12 +49,12 @@ func RegisterPath(
 	jobEndpoint.GET("/:id", ctrlJob.GetJobById, allAccess)                          //freelancer
 
 	proposalEndpoint := e.Group("/proposals", jwtMiddleware)
-	proposalEndpoint.PATCH("/:id/accept", ctrlProp.UpdateStatusProposal, clientAccess) //client
+	proposalEndpoint.PATCH("/:id/accept", ctrlProp.ApproveProposal, clientAccess) //client
 
 	// projectEndpoint := e.Group("/projects", jwtMiddleware)
 	// projectEndpoint.GET("/my")           // freelancer
 	// projectEndpoint.PATCH("/:id/submit") // freelancer
-	// projectEndpoint.POST("/:id/pay")     //freelancer
+	// projectEndpoint.POST("/:id/pay")     //client
 
 	// client endpoint
 	// POST /jobs X

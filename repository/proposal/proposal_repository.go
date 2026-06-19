@@ -61,3 +61,10 @@ func (r *GormRepository) UpdateProposal(input proposal.Proposal) (proposal propo
 func (r *GormRepository) DeleteProposal(proposalId int) (err error) {
 	return r.WithContext(context.Background()).Where("id = ?", proposalId).Delete(&proposal.Proposal{}).Error
 }
+
+func (r *GormRepository) PatchProposal(proposalId int, status string) (err error) {
+	return r.DB.WithContext(context.Background()).
+		Model(&proposal.Proposal{}).
+		Where("id = ?", proposalId).
+		Update("status", status).Error
+}

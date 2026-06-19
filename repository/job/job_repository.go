@@ -51,3 +51,10 @@ func (r *GormRepository) UpdateJob(input job.Job) (job job.Job, err error) {
 func (r *GormRepository) DeleteJob(jobId int) (err error) {
 	return r.WithContext(context.Background()).Where("id = ?", jobId).Delete(&job.Job{}).Error
 }
+
+func (r *GormRepository) PatchJob(jobId int, status string) (err error) {
+	return r.DB.WithContext(context.Background()).
+		Model(&job.Job{}).
+		Where("id = ?", jobId).
+		Update("status", status).Error
+}

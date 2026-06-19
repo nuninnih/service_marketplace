@@ -153,6 +153,33 @@ func (ctrl *Controller) CreateProposal(c echo.Context) error {
 	return common.CompleteSuccessResponse(c, http.StatusCreated, proposal)
 }
 
-func (ctrl *Controller) UpdateStatusProposal(c echo.Context) error {
-	return common.CompleteSuccessResponse(c, http.StatusOK, "response")
+func (ctrl *Controller) ApproveProposal(c echo.Context) error {
+	id := c.Get("id").(int)
+
+	proposalId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		ctrl.logger.Error("CTRL UPDATE PROP", slog.Any("Get Params", err))
+		return common.CompleteErrorResponse(c, http.StatusBadRequest, "ID Should Be Number")
+	}
+
+	project, err := ctrl.propSvc.UpdateStatusProposal(id, proposalId, "accepted")
+	if err != nil {
+		fmt.Println(err)
+
+		if strings.Contains(err.Error(), "Not Found") {
+			return common.CompleteErrorResponse(c, http.StatusNotFound, err.Error())
+		}
+
+		if strings.Contains(err.Error(), "Closed") {
+			return common.CompleteErrorResponse(c, http.StatusNotFound, err.Error())
+		}
+
+		if strings.Contains(err.Error(), "Forbidden") {
+			return common.CompleteErrorResponse(c, http.StatusForbidden, err.Error())
+		}
+
+		return common.CompleteErrorResponse(c, http.StatusInternalServerError, "Failed Processing Request")
+	}
+
+	return common.CompleteSuccessResponse(c, http.StatusCreated, project)
 }

@@ -7,4 +7,5 @@ type Repository interface {
 	CreateJob(input Job) (job Job, err error)
 	UpdateJob(input Job) (job Job, err error)
 	DeleteJob(jobId int) (err error)
+	PatchJob(jobId int, status string) (err error)
 }

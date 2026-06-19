@@ -6,4 +6,5 @@ type Repository interface {
 	CreateProposal(input Proposal) (proposal Proposal, err error)
 	UpdateProposal(input Proposal) (proposal Proposal, err error)
 	DeleteProposal(proposalId int) (err error)
+	PatchProposal(proposalId int, status string) (err error)
 }
