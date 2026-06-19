@@ -33,8 +33,6 @@ func RegisterPath(
 		"freelancer": true,
 	})
 
-	// FREE ROUTE
-	// dashboard endpoint -- no need login
 	e.GET("/freelancers", ctrlUser.GetAllFreelancer)
 	e.GET("/jobs", ctrlJob.GetAllJobs)
 	e.POST("/webhook", ctrlProj.MidtransWebhook)

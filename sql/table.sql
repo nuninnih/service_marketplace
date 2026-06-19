@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS payments, projects, proposals, jobs, users;
+DROP TABLE IF EXISTS projects, proposals, jobs, users;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -57,23 +57,9 @@ CREATE TABLE projects (
     	FOREIGN KEY (freelancer_id)
         REFERENCES users(id),
     status VARCHAR(20) NOT NULL DEFAULT 'in_progress'
-        CHECK (status IN ('in_progress','submitted','paid','completed')),
+        CHECK (status IN ('in_progress','submitted','completed')),
     submitted_at TIMESTAMP NULL,
     completed_at TIMESTAMP NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE payments (
-    id SERIAL PRIMARY KEY,
-    project_id INT NOT NULL,
-    	FOREIGN KEY (project_id)
-        REFERENCES projects(id),
-    amount NUMERIC(12,2) NOT NULL,
-    midtrans_order_id VARCHAR(255),
-    transaction_id VARCHAR(255),
-    status VARCHAR(20) NOT NULL DEFAULT 'pending'
-        CHECK (status IN ('pending', 'success', 'failed')),
-    paid_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -1,0 +1,1963 @@
+{
+  "info": {
+    "_postman_id": "e616f676-2e34-4151-be34-ed1d5c1e00bc",
+    "name": "service_marketplace",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22937108"
+  },
+  "item": [
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "/jobs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/jobs?desc=code",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "jobs"
+              ],
+              "query": [
+                {
+                  "key": "desc",
+                  "value": "code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/jobs [200] - OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/jobs?desc",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "key": "desc",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 09:13:46 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "815"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"ID\": 5,\n            \"Client\": \"Nunin Client\",\n            \"Title\": \"Memetik Bunga Surgawi\",\n            \"Description\": \"Memetik Bunga Surgawi di Gunung Es Selatan\",\n            \"Budget\": 10000000,\n            \"Status\": \"open\",\n            \"CreatedAt\": \"2026-06-18T16:11:49.852088Z\"\n        },\n        {\n            \"ID\": 4,\n            \"Client\": \"Nunin Client\",\n            \"Title\": \"Memetik Bunga Surgawi\",\n            \"Description\": \"Memetik Bunga Surgawi di Gunung Es Selatan\",\n            \"Budget\": 10000000,\n            \"Status\": \"open\",\n            \"CreatedAt\": \"2026-06-18T16:07:56.376002Z\"\n        },\n        {\n            \"ID\": 3,\n            \"Client\": \"Nunin Client\",\n            \"Title\": \"Nemenin Kondangan\",\n            \"Description\": \"Nemenin Kondangan di Malang 2 jam aja\",\n            \"Budget\": 100000,\n            \"Status\": \"open\",\n            \"CreatedAt\": \"2026-06-18T16:00:21.871527Z\"\n        },\n        {\n            \"ID\": 1,\n            \"Client\": \"Nunin Client\",\n            \"Title\": \"Build REST API with Golang\",\n            \"Description\": \"Need backend developer for API project\",\n            \"Budget\": 5000000,\n            \"Status\": \"open\",\n            \"CreatedAt\": \"2026-06-17T22:43:45.788583Z\"\n        }\n    ],\n    \"message\": \"OK\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "/jobs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImNsaWVudCIsImV4cCI6MTc4MTg4MTIzNiwiaWF0IjoxNzgxNzk0ODM2fQ.0pbgFdKFYBk7AkkXIPJGvLqpp3O-LatLdcBPeV2_Pmc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\" : \"Menumpas Bandit\",\n    \"description\" : \"Menumpas Bandit di hutan terlarang\",\n    \"budget\": 10000000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/jobs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "jobs"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/jobs [201] - Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\" : \"Memetik Bunga Surgawi\",\n    \"description\" : \"Memetik Bunga Surgawi di Gunung Es Selatan\",\n    \"budget\": 10000000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 09:07:56 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "210"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"ID\": 4,\n        \"Title\": \"Memetik Bunga Surgawi\",\n        \"Description\": \"Memetik Bunga Surgawi di Gunung Es Selatan\",\n        \"Budget\": 10000000,\n        \"Status\": \"open\",\n        \"CreatedAt\": \"2026-06-18T16:07:56.376002+07:00\"\n    },\n    \"message\": \"Created\"\n}"
+            },
+            {
+              "name": "/jobs [401] - Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\" : \"Memetik Bunga Surgawi\",\n    \"description\" : \"Memetik Bunga Surgawi di Gunung Es Selatan\",\n    \"budget\": 10000000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 09:09:22 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "39"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid or Missing Token\"\n}"
+            },
+            {
+              "name": "/jobs [403] - Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\" : \"Memetik Bunga Surgawi\",\n    \"description\" : \"Memetik Bunga Surgawi di Gunung Es Selatan\",\n    \"budget\": 10000000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 09:11:17 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "24"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Forbidden\"\n}"
+            },
+            {
+              "name": "/jobs [400] - Bad Request : Validation Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\" : \"\",\n    \"description\" : \"Memetik Bunga Surgawi di Gunung Es Selatan\",\n    \"budget\": 10000000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 09:12:12 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "34"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": [\n        \"Title is required\"\n    ]\n}"
+            },
+            {
+              "name": "/jobs [400] - Bad Request : Invalid Spec",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\" : \"Memetik Bunga Surgawi\",\n    \"description\" : \"Memetik Bunga Surgawi di Gunung Es Selatan\",\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 09:12:36 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "36"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid Specification\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "/jobs/my",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImZyZWVsYW5jZXIiLCJleHAiOjE3ODE5NDYwNTksImlhdCI6MTc4MTg1OTY1OX0.glpy-6BUVLDwBlPcphq6HYawVBcaGMvFTHpWFKiI23U",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/jobs/my",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "jobs",
+                "my"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/jobs/my [200] - OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/jobs/my",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "my"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:00:21 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "206"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"ID\": 3,\n            \"Client\": \"Zahra\",\n            \"Title\": \"Menumpas Bandit\",\n            \"Description\": \"Menumpas Bandit di hutan terlarang\",\n            \"Budget\": 10000000,\n            \"Status\": \"closed\",\n            \"CreatedAt\": \"2026-06-18T22:01:34.40647Z\"\n        }\n    ],\n    \"message\": \"OK\"\n}"
+            },
+            {
+              "name": "/jobs/my [401] - Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/jobs/my",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "my"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:00:35 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "39"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid or Missing Token\"\n}"
+            },
+            {
+              "name": "/jobs/my [403] - Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/jobs/my",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "my"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:01:06 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "24"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Forbidden\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "/jobs/:id/proposals",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImNsaWVudCIsImV4cCI6MTc4MTkwODc4MiwiaWF0IjoxNzgxODIyMzgyfQ.jQHi62gPEesGUad-2p2DPJO5xsvMkvLUd58Gp_XM_e4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/jobs/1/proposals",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "jobs",
+                "1",
+                "proposals"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/jobs/:id/proposals [403] - Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/jobs/1/proposals",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "1",
+                    "proposals"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 22:38:55 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "24"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Forbidden\"\n}"
+            },
+            {
+              "name": "/jobs/:id/proposals [401] - Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/jobs/1/proposals",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "1",
+                    "proposals"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 22:39:20 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "39"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid or Missing Token\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "/jobs/:id/proposals",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImNsaWVudCIsImV4cCI6MTc4MTk0ODg0NywiaWF0IjoxNzgxODYyNDQ3fQ.UDw0iZXsxnyKWJAbBnUaG_9Ggltt0FfYoIaXG-3NB1g",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cover_letter\" : \"Saya berpengalaman di Mendaki sudah 5 tahun\",\n    \"bid_amount\" : 5000000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/jobs/2/proposals",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "jobs",
+                "2",
+                "proposals"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/jobs/:id/proposals [201] - Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cover_letter\" : \"Saya berpengalaman di Mendaki sudah 5 tahun\",\n    \"bid_amount\" : 5000000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs/2/proposals",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "2",
+                    "proposals"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:46:28 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "211"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"ID\": 7,\n        \"JobID\": 2,\n        \"FreelancerID\": 2,\n        \"CoverLetter\": \"Saya berpengalaman di Mendaki sudah 5 tahun\",\n        \"BidAmount\": 5000000,\n        \"Status\": \"pending\",\n        \"CreatedAt\": \"2026-06-19T16:46:28.332023+07:00\"\n    },\n    \"message\": \"Created\"\n}"
+            },
+            {
+              "name": "/jobs/:id/proposals [400] - Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cover_letter\" : \"Saya berpengalaman di Mendaki sudah 5 tahun\",\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs/2/proposals",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "2",
+                    "proposals"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:46:44 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "36"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid Specification\"\n}"
+            },
+            {
+              "name": "/jobs/:id/proposals [401] - Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cover_letter\" : \"Saya berpengalaman di Mendaki sudah 5 tahun\",\n    \"bid_amount\" : 5000000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs/2/proposals",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "2",
+                    "proposals"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:47:03 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "39"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid or Missing Token\"\n}"
+            },
+            {
+              "name": "/jobs/:id/proposals [403] - Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cover_letter\" : \"Saya berpengalaman di Mendaki sudah 5 tahun\",\n    \"bid_amount\" : 5000000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs/2/proposals",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "2",
+                    "proposals"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:47:35 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "24"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Forbidden\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "/jobs/:id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImNsaWVudCIsImV4cCI6MTc4MTkzNDAxMSwiaWF0IjoxNzgxODQ3NjExfQ.gzSETbi23deiQKTvFCRz7JYFMIq06vtZnV1DSPXWYkA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/jobs/10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "jobs",
+                "10"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/jobs/:id [200] - OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:01:32 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "226"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"ID\": 1,\n        \"Client\": \"Nunin Client\",\n        \"Title\": \"Build REST API with Golang\",\n        \"Description\": \"Need backend developer for API project\",\n        \"Budget\": 5000000,\n        \"Status\": \"closed\",\n        \"CreatedAt\": \"2026-06-18T13:31:23.788855Z\"\n    },\n    \"message\": \"OK\"\n}"
+            },
+            {
+              "name": "/jobs/:id [404] - Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs/10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "10"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:01:46 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "29"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Data Not Found\"\n}"
+            },
+            {
+              "name": "/jobs/:id [401] - Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:8080/jobs/10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "jobs",
+                    "10"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 09:02:02 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "39"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid or Missing Token\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "/login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\" : \"nunin@mail.com\",\n    \"password\" : \"passwordclient\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/login [200] - OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\" : \"ula@mail.com\",\n    \"password\" : \"passwordfreelancer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/users/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "users",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 17 Jun 2026 07:48:59 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "183"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNzgxNzY4OTM5LCJpYXQiOjE3ODE2ODI1Mzl9.MU9aKiVgbfPD-bRbllxCMAp2aYc0Z7l7ku05bkj8_g8\",\n    \"message\": \"Login Success\"\n}"
+            },
+            {
+              "name": "/login [400] - Bad Request : Validation Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\" : \"nunin@mail.com\",\n    \"password\" : \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/users/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "users",
+                    "login"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 08:58:30 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "37"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": [\n        \"Password is required\"\n    ]\n}"
+            },
+            {
+              "name": "/login [410] - Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\" : \"nunin@mail.com\",\n    \"password\" : \"passwordsalah\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/users/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "users",
+                    "login"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 08:59:05 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "40"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid Email or Password\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "/register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\" : \"Joko\",\n    \"email\" : \"joko@mail.com\",\n    \"password\" : \"passwordfreelancer\",\n    \"role\": \"freelancer\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "users",
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/register [201] - Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\" : \"Farid\",\n    \"email\" : \"farid@mail.com\",\n    \"password\" : \"passwordfreelancer\",\n    \"role\": \"FREELANCER\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/users/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "users",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 17 Jun 2026 07:51:17 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "91"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"Name\": \"Farid\",\n        \"Email\": \"farid@mail.com\",\n        \"Role\": \"FREELANCER\"\n    },\n    \"message\": \"Created\"\n}"
+            },
+            {
+              "name": "/register [400] - Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\" : \"Joko\",\n    \"email\" : \"joko@mail.com\",\n    \"password\" : \"passwordfreelancer\",\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/users/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "users",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 08:59:49 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "36"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid Specification\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "freelancers",
+      "item": [
+        {
+          "name": "/freelancers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/freelancers?desc=",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "freelancers"
+              ],
+              "query": [
+                {
+                  "key": "desc",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/freelancers [200] - OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/freelancers?desc=",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "freelancers"
+                  ],
+                  "query": [
+                    {
+                      "key": "desc",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 09:14:39 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "106"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"Name\": \"Ula Freelancer\",\n            \"Email\": \"ula@mail.com\",\n            \"Profile\": \"Backend specialist\"\n        }\n    ],\n    \"message\": \"OK\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "deploy",
+      "item": [
+        {
+          "name": "/login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\" : \"nunin@mail.com\",\n    \"password\" : \"passwordclient\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://servicemarketplace-production-ddbb.up.railway.app/users/login",
+              "protocol": "https",
+              "host": [
+                "servicemarketplace-production-ddbb",
+                "up",
+                "railway",
+                "app"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/pay-project",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImNsaWVudCIsImV4cCI6MTc4MTk0Mzk3MCwiaWF0IjoxNzgxODU3NTcwfQ.im8y65ocoC61KFLK0v1uGamBF9AJWyROwbJnvrDwQYw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://servicemarketplace-production-ddbb.up.railway.app/projects/1/pay",
+              "protocol": "https",
+              "host": [
+                "servicemarketplace-production-ddbb",
+                "up",
+                "railway",
+                "app"
+              ],
+              "path": [
+                "projects",
+                "1",
+                "pay"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "proposal",
+      "item": [
+        {
+          "name": "/proposal/:id/accept",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImNsaWVudCIsImV4cCI6MTc4MTkzNjg0OCwiaWF0IjoxNzgxODUwNDQ4fQ.yFyBS6ikwjpt-H7gxl4lWy6gYUEb8ZeLvBWGFixBkNw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/proposals/6/accept",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "proposals",
+                "6",
+                "accept"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/proposal/:id/accept [403] - Forbidden",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:8080/proposals/1/accept",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "proposals",
+                    "1",
+                    "accept"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:23:28 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "24"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Forbidden\"\n}"
+            },
+            {
+              "name": "/proposal/:id/accept [500] - Server Error",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:8080/proposals/1/accept",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "proposals",
+                    "1",
+                    "accept"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:24:04 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "40"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Failed Processing Request\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "project",
+      "item": [
+        {
+          "name": "/projects/:id/submit",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImZyZWVsYW5jZXIiLCJleHAiOjE3ODE5MzkyNjIsImlhdCI6MTc4MTg1Mjg2Mn0.-tQXxFrVBcwH4PkQRYKD4ToAAoy55gxxtxEFOuIAXVI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/projects/1/submit",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "projects",
+                "1",
+                "submit"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/projects/:id/submit [401] - Unauthorized",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/projects/2/submit",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "projects",
+                    "2",
+                    "submit"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:01:34 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "39"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Invalid or Missing Token\"\n}"
+            },
+            {
+              "name": "/projects/:id/submit [403] - Forbidden",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/projects/2/submit",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "projects",
+                    "2",
+                    "submit"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:07:22 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "24"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Forbidden\"\n}"
+            },
+            {
+              "name": "/projects/:id/submit [404] - Not Found",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/projects/2/submit",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "projects",
+                    "2",
+                    "submit"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:07:55 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "29"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Data Not Found\"\n}"
+            },
+            {
+              "name": "/projects/:id/submit [200] - OK",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/projects/1/submit",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "projects",
+                    "1",
+                    "submit"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:08:29 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "41"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": \"Status Updated\",\n    \"message\": \"OK\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "/projects/:id/pay",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImNsaWVudCIsImV4cCI6MTc4MTk0Mzk3MCwiaWF0IjoxNzgxODU3NTcwfQ.im8y65ocoC61KFLK0v1uGamBF9AJWyROwbJnvrDwQYw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/projects/1/pay",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "projects",
+                "1",
+                "pay"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "/projects/:id/pay [200] - OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/projects/1/pay",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "projects",
+                    "1",
+                    "pay"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 08:47:08 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "180"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"token\": \"7dc54944-4b10-4c45-bf90-2e0c67415789\",\n        \"redirect_url\": \"https://app.sandbox.midtrans.com/snap/v4/redirection/7dc54944-4b10-4c45-bf90-2e0c67415789\"\n    },\n    \"message\": \"OK\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
