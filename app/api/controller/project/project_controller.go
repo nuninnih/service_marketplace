@@ -88,7 +88,6 @@ func (ctrl *Controller) CompleteProject(c echo.Context) error {
 func (ctrl *Controller) MidtransWebhook(c echo.Context) error {
 	var notificationPayload map[string]interface{}
 
-	// Bind payload JSON dari Midtrans
 	if err := c.Bind(&notificationPayload); err != nil {
 		ctrl.logger.Error("CTRL MIDTRANS WEBHOOK", slog.Any("Bind payload", err))
 		return common.CompleteErrorResponse(c, http.StatusBadRequest, "Invalid Payload")
@@ -99,6 +98,5 @@ func (ctrl *Controller) MidtransWebhook(c echo.Context) error {
 		return common.CompleteErrorResponse(c, http.StatusInternalServerError, "Failed Processing Request")
 	}
 
-	// Midtrans hanya butuh respon HTTP 200 OK untuk tahu bahwa webhook berhasil diterima
 	return common.CompleteSuccessResponse(c, http.StatusOK, "Status Completed")
 }
