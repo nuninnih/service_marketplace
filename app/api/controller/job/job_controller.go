@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -166,6 +167,42 @@ func (ctrl *Controller) GetMyJob(c echo.Context) error {
 	}
 
 	return common.CompleteSuccessResponse(c, http.StatusOK, response)
+}
+
+func (ctrl *Controller) GetJobById(c echo.Context) error {
+	jobId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		ctrl.logger.Error("CTRL CREATE PROP", slog.Any("Get Params", err))
+		return common.CompleteErrorResponse(c, http.StatusBadRequest, "ID Should Be Number")
+	}
+
+	job, err := ctrl.jobSvc.GetJobById(jobId)
+	if err != nil {
+		fmt.Println(err)
+
+		if strings.Contains(err.Error(), "Not Found") {
+			return common.CompleteErrorResponse(c, http.StatusNotFound, err.Error())
+		}
+
+		if strings.Contains(err.Error(), "Forbidden") {
+			return common.CompleteErrorResponse(c, http.StatusForbidden, err.Error())
+		}
+
+		return common.CompleteErrorResponse(c, http.StatusInternalServerError, "Failed Processing Request")
+	}
+
+	var response = allJob{
+		ID:          job.ID,
+		Client:      job.Client.Name,
+		Title:       job.Title,
+		Description: job.Description,
+		Budget:      job.Budget,
+		Status:      job.Status,
+		CreatedAt:   job.CreatedAt,
+	}
+
+	return common.CompleteSuccessResponse(c, http.StatusOK, response)
+
 }
 
 type MidtransNotification struct {

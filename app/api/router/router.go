@@ -18,6 +18,11 @@ func RegisterPath(
 ) {
 	jwtMiddleware := middleware.JWTMiddleware(jwtSecret)
 
+	allAccess := middleware.ACLMiddleware(map[string]bool{
+		"client":     true,
+		"freelancer": true,
+	})
+
 	clientAccess := middleware.ACLMiddleware(map[string]bool{
 		"client": true,
 	})
@@ -41,10 +46,10 @@ func RegisterPath(
 	jobEndpoint.GET("/my", ctrlJob.GetMyJob, clientAccess)                          //client
 	jobEndpoint.GET("/:id/proposals", ctrlProp.GetJobProposalPerUser, clientAccess) //client
 	jobEndpoint.POST("/:id/proposals", ctrlProp.CreateProposal, freelancerAccess)   //freelancer
-	// jobEndpoint.GET("/:id")                               //freelancer
+	jobEndpoint.GET("/:id", ctrlJob.GetJobById, allAccess)                          //freelancer
 
 	proposalEndpoint := e.Group("/proposals", jwtMiddleware)
-	proposalEndpoint.PATCH("/:id/accept", ctrlProp.UpdateStatusProposal) //client
+	proposalEndpoint.PATCH("/:id/accept", ctrlProp.UpdateStatusProposal, clientAccess) //client
 
 	// projectEndpoint := e.Group("/projects", jwtMiddleware)
 	// projectEndpoint.GET("/my")           // freelancer

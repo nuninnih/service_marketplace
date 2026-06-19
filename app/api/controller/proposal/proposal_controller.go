@@ -152,6 +152,7 @@ func (ctrl *Controller) CreateProposal(c echo.Context) error {
 
 	return common.CompleteSuccessResponse(c, http.StatusCreated, proposal)
 }
+
 func (ctrl *Controller) UpdateStatusProposal(c echo.Context) error {
 	return common.CompleteSuccessResponse(c, http.StatusOK, "response")
 }

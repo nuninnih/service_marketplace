@@ -1,7 +1,11 @@
 package job
 
 import (
+	"errors"
 	"log/slog"
+
+	errSvc "github.com/nuninnih/service_marketplace/service"
+	"gorm.io/gorm"
 )
 
 type service struct {
@@ -31,7 +35,17 @@ func (s *service) GetAllJobs(input string) (jobs []Job, err error) {
 }
 
 func (s *service) GetJobById(id int) (jobs Job, err error) {
-	return s.repo.GetJobById(id)
+	getJob, err := s.repo.GetJobById(id)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			s.logger.Error("SVC JOB BY ID", slog.Any("Data Not Found", err))
+			return Job{}, errSvc.ErrDataNotFound
+		}
+
+		return Job{}, err
+	}
+
+	return getJob, err
 }
 
 func (s *service) CreateJob(input Job) (job Job, err error) {
