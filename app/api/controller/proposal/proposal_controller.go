@@ -97,8 +97,60 @@ func (ctrl *Controller) GetJobProposalPerUser(c echo.Context) error {
 	}
 	return common.CompleteSuccessResponse(c, http.StatusOK, response)
 }
+
+type createProposalRequest struct {
+	CoverLetter string  `json:"cover_letter" validate:"required"`
+	BidAmount   float64 `json:"bid_amount" validate:"required,gte=0"`
+}
+
 func (ctrl *Controller) CreateProposal(c echo.Context) error {
-	return common.CompleteSuccessResponse(c, http.StatusCreated, "response")
+	id := c.Get("id").(int)
+
+	jobId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		ctrl.logger.Error("CTRL CREATE PROP", slog.Any("Get Params", err))
+		return common.CompleteErrorResponse(c, http.StatusBadRequest, "ID Should Be Number")
+	}
+
+	request := new(createProposalRequest)
+	if err := c.Bind(request); err != nil {
+		fmt.Println(err)
+		ctrl.logger.Error("CTRL CREATE PROP", slog.Any("Bind", err))
+		return common.CompleteErrorResponse(c, http.StatusBadRequest, "Invalid Specification")
+	}
+
+	if err := validator.New().Struct(request); err != nil {
+		fmt.Println(err)
+		ctrl.logger.Error("CTRL CREATE PROP", slog.Any("Validate", err))
+		return common.CompleteErrorResponse(c, http.StatusBadRequest, common.ValidationErrors(err))
+	}
+
+	proposal, err := ctrl.propSvc.CreateProposal(proposal.Proposal{
+		FreelancerID: id,
+		JobID:        jobId,
+		CoverLetter:  request.CoverLetter,
+		BidAmount:    request.BidAmount,
+	})
+
+	if err != nil {
+		fmt.Println(err)
+
+		if strings.Contains(err.Error(), "Not Found") {
+			return common.CompleteErrorResponse(c, http.StatusNotFound, err.Error())
+		}
+
+		if strings.Contains(err.Error(), "Closed") {
+			return common.CompleteErrorResponse(c, http.StatusNotFound, err.Error())
+		}
+
+		if strings.Contains(err.Error(), "Forbidden") {
+			return common.CompleteErrorResponse(c, http.StatusForbidden, err.Error())
+		}
+
+		return common.CompleteErrorResponse(c, http.StatusInternalServerError, "Failed Processing Request")
+	}
+
+	return common.CompleteSuccessResponse(c, http.StatusCreated, proposal)
 }
 func (ctrl *Controller) UpdateStatusProposal(c echo.Context) error {
 	return common.CompleteSuccessResponse(c, http.StatusOK, "response")

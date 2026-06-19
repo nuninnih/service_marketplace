@@ -6,10 +6,10 @@ import (
 
 type Proposal struct {
 	ID           int
-	JobId        int
-	FreelancerId int
+	JobID        int
+	FreelancerID int
 	CoverLetter  string
-	BidAmount    int
+	BidAmount    float64
 	Status       string
 	CreatedAt    time.Time
 }

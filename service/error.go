@@ -10,4 +10,5 @@ var (
 	ErrInternalServer       = errors.New("Failed Processing Request")
 	ErrGenerateToken        = errors.New("Failed Generate Token")
 	ErrForbidden            = errors.New("Forbidden")
+	ErrClosed               = errors.New("Job Already Closed")
 )

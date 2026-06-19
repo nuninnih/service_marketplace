@@ -51,7 +51,7 @@ func (s *service) GetJobProposalPerUser(userId, jobId int) (proposals []JobPropo
 
 	getProposal, err := s.repo.GetAllProposalByUser(jobId)
 	if err != nil {
-		s.logger.Error("SVC PROP PER USER", slog.Any("Get WO", err))
+		s.logger.Error("SVC PROP PER USER", slog.Any("Get PER USER", err))
 		return
 	}
 
@@ -59,7 +59,29 @@ func (s *service) GetJobProposalPerUser(userId, jobId int) (proposals []JobPropo
 }
 
 func (s *service) CreateProposal(input Proposal) (proposal Proposal, err error) {
-	return
+	getJob, err := s.jobRepo.GetJobById(input.JobID)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			s.logger.Error("SVC CREATE PROP", slog.Any("Data Not Found", err))
+			return Proposal{}, errSvc.ErrDataNotFound
+		}
+
+		return Proposal{}, err
+	}
+
+	if getJob.Status == "closed" {
+		s.logger.Error("SVC CREATE PROP", slog.Any("Job Closed", err))
+		return Proposal{}, errSvc.ErrClosed
+	}
+
+	input.Status = "pending"
+	createProposal, err := s.repo.CreateProposal(input)
+	if err != nil {
+		s.logger.Error("SVC CREATE PROP", slog.Any("Create prop", err))
+		return
+	}
+
+	return createProposal, err
 }
 
 func (s *service) UpdateStatusProposal(proposalId int, status string) (proposal Proposal, err error) {
