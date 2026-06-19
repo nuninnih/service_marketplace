@@ -1,12 +1,9 @@
 package job
 
 import (
-	"crypto/sha512"
-	"encoding/hex"
 	"fmt"
 	"log/slog"
 	"net/http"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -212,58 +209,4 @@ type MidtransNotification struct {
 	SignatureKey      string `json:"signature_key"`
 	TransactionStatus string `json:"transaction_status"`
 	FraudStatus       string `json:"fraud_status"`
-}
-
-func (ctrl *Controller) WebhookHandler(c echo.Context) error {
-	var payload MidtransNotification
-
-	// 1. Parse the incoming JSON payload using Echo's binder
-	if err := c.Bind(&payload); err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"message": "Bad request"})
-	}
-
-	// 2. Construct the string to be hashed
-	// Formula: order_id + status_code + gross_amount + server_key
-	hashString := payload.OrderID + payload.StatusCode + payload.GrossAmount + os.Getenv("MIDTRANS_SERVER_KEY")
-
-	// 3. Generate the SHA512 hash
-	hasher := sha512.New()
-	hasher.Write([]byte(hashString))
-	generatedSignature := hex.EncodeToString(hasher.Sum(nil))
-
-	// 4. Verify the signature
-	if generatedSignature != payload.SignatureKey {
-		fmt.Println("⚠️ Invalid signature detected! Potential spoofing.")
-		// Return 403 Forbidden
-		return c.JSON(http.StatusForbidden, map[string]string{"message": "Invalid signature"})
-	}
-
-	// 5. Process the transaction based on the status
-	fmt.Printf("✅ Signature verified for Order ID: %s\n", payload.OrderID)
-
-	switch payload.TransactionStatus {
-	case "capture":
-		if payload.FraudStatus == "challenge" {
-			fmt.Println("Payment challenged by FDS (Fraud Detection System).")
-			// Update DB: status = 'challenge'
-		} else if payload.FraudStatus == "accept" {
-			fmt.Println("Payment accepted.")
-			// Update DB: status = 'success'
-		}
-	case "settlement":
-		fmt.Println("Payment settled successfully!")
-		// Update DB: status = 'success'
-	case "cancel", "deny", "expire":
-		fmt.Printf("Payment failed/expired. Status: %s\n", payload.TransactionStatus)
-		// Update DB: status = 'failed'
-	case "pending":
-		fmt.Println("Payment is pending (awaiting customer action).")
-		// Update DB: status = 'pending'
-	}
-
-	// 6. Acknowledge receipt to Midtrans IMMEDIATELY
-	return c.JSON(http.StatusOK, map[string]string{
-		"status":  "success",
-		"message": "Webhook received",
-	})
 }

@@ -37,7 +37,7 @@ func RegisterPath(
 	// dashboard endpoint -- no need login
 	e.GET("/freelancers", ctrlUser.GetAllFreelancer)
 	e.GET("/jobs", ctrlJob.GetAllJobs)
-	e.POST("/webhook", ctrlJob.WebhookHandler)
+	e.POST("/webhook", ctrlProj.MidtransWebhook)
 
 	userEndpoint := e.Group("/users")
 	userEndpoint.POST("/register", ctrlUser.Register)
@@ -54,7 +54,6 @@ func RegisterPath(
 	proposalEndpoint.PATCH("/:id/accept", ctrlProp.ApproveProposal, clientAccess) //client
 
 	projectEndpoint := e.Group("/projects", jwtMiddleware)
-	// projectEndpoint.GET("/my")           // freelancer
-	projectEndpoint.PATCH("/:id/submit", ctrlProj.UpdateStatusProject, freelancerAccess) // freelancer
-	// projectEndpoint.PACTH("/:id/pay")     //client
+	projectEndpoint.PATCH("/:id/submit", ctrlProj.SubmitProject, freelancerAccess) // freelancer
+	projectEndpoint.GET("/:id/pay", ctrlProj.CompleteProject, clientAccess)        //client
 }

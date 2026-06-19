@@ -31,7 +31,7 @@ func NewController(
 	}
 }
 
-func (ctrl *Controller) UpdateStatusProject(c echo.Context) error {
+func (ctrl *Controller) SubmitProject(c echo.Context) error {
 	userId := c.Get("id").(int)
 
 	projectId, err := strconv.Atoi(c.Param("id"))
@@ -56,4 +56,49 @@ func (ctrl *Controller) UpdateStatusProject(c echo.Context) error {
 	}
 
 	return common.CompleteSuccessResponse(c, http.StatusOK, "Status Updated")
+}
+
+func (ctrl *Controller) CompleteProject(c echo.Context) error {
+	userId := c.Get("id").(int)
+
+	projectId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		ctrl.logger.Error("CTRL UPDATE PROJ", slog.Any("Get Params", err))
+		return common.CompleteErrorResponse(c, http.StatusBadRequest, "ID Should Be Number")
+	}
+
+	resp, err := ctrl.projSvc.PayProject(userId, projectId)
+	if err != nil {
+		fmt.Println(err)
+
+		if strings.Contains(err.Error(), "Not Found") {
+			return common.CompleteErrorResponse(c, http.StatusNotFound, err.Error())
+		}
+
+		if strings.Contains(err.Error(), "Forbidden") {
+			return common.CompleteErrorResponse(c, http.StatusForbidden, err.Error())
+		}
+
+		return common.CompleteErrorResponse(c, http.StatusInternalServerError, "Failed Processing Request")
+	}
+
+	return common.CompleteSuccessResponse(c, http.StatusOK, resp)
+}
+
+func (ctrl *Controller) MidtransWebhook(c echo.Context) error {
+	var notificationPayload map[string]interface{}
+
+	// Bind payload JSON dari Midtrans
+	if err := c.Bind(&notificationPayload); err != nil {
+		ctrl.logger.Error("CTRL MIDTRANS WEBHOOK", slog.Any("Bind payload", err))
+		return common.CompleteErrorResponse(c, http.StatusBadRequest, "Invalid Payload")
+	}
+	fmt.Println(notificationPayload)
+	err := ctrl.projSvc.HandleWebhook(notificationPayload)
+	if err != nil {
+		return common.CompleteErrorResponse(c, http.StatusInternalServerError, "Failed Processing Request")
+	}
+
+	// Midtrans hanya butuh respon HTTP 200 OK untuk tahu bahwa webhook berhasil diterima
+	return common.CompleteSuccessResponse(c, http.StatusOK, "Status Completed")
 }

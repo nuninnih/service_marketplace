@@ -15,3 +15,20 @@ type Project struct {
 	CompletedAt  *time.Time
 	CreatedAt    time.Time
 }
+
+type ProjectDetail struct {
+	ID           int
+	JobID        int
+	ProposalID   int
+	ClientID     int
+	FreelancerID int
+	Status       string
+	SubmittedAt  *time.Time
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
+
+	JobTitle       string
+	ClientName     string
+	FreelancerName string
+	Amount         float64
+}

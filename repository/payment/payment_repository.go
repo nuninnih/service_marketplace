@@ -1,13 +1,24 @@
 package payments
 
-import "gorm.io/gorm"
+import (
+	"log/slog"
+	"net/http"
+)
 
-type GormRepository struct {
-	*gorm.DB
+type MidtransConfig struct {
+	Client *http.Client
+	ApiKey string
+	Host   string
 }
 
-func NewGormRepository(db *gorm.DB) *GormRepository {
-	return &GormRepository{
-		db.Table("payments"),
+type MidtransRepository struct {
+	logger         *slog.Logger
+	MidtransConfig MidtransConfig
+}
+
+func NewMidtransRepository(logger *slog.Logger, config MidtransConfig) *MidtransRepository {
+	return &MidtransRepository{
+		logger,
+		config,
 	}
 }
