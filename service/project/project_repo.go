@@ -6,4 +6,5 @@ type Repository interface {
 	CreateProject(input Project) (project Project, err error)
 	UpdateProject(input Project) (project Project, err error)
 	DeleteProject(projectId int) (err error)
+	PatchProject(projectId int, status string) (err error)
 }

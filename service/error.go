@@ -11,4 +11,5 @@ var (
 	ErrGenerateToken        = errors.New("Failed Generate Token")
 	ErrForbidden            = errors.New("Forbidden")
 	ErrClosed               = errors.New("Job Already Closed")
+	ErrAccepted             = errors.New("Proposal Already Accepted")
 )

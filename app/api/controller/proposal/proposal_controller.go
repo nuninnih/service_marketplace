@@ -171,7 +171,11 @@ func (ctrl *Controller) ApproveProposal(c echo.Context) error {
 		}
 
 		if strings.Contains(err.Error(), "Closed") {
-			return common.CompleteErrorResponse(c, http.StatusNotFound, err.Error())
+			return common.CompleteErrorResponse(c, http.StatusBadRequest, err.Error())
+		}
+
+		if strings.Contains(err.Error(), "Accepted") {
+			return common.CompleteErrorResponse(c, http.StatusBadRequest, err.Error())
 		}
 
 		if strings.Contains(err.Error(), "Forbidden") {

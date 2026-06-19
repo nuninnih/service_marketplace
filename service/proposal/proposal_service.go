@@ -113,6 +113,10 @@ func (s *service) UpdateStatusProposal(userId, proposalId int, status string) (p
 		return project.Project{}, err
 	}
 
+	if getProposal.Status == "accepted" {
+		return project.Project{}, errSvc.ErrAccepted
+	}
+
 	getJob, err := s.jobRepo.GetJobById(getProposal.JobID)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {

@@ -2,6 +2,7 @@ package project
 
 import (
 	"context"
+	"time"
 
 	"github.com/nuninnih/service_marketplace/service/project"
 	"gorm.io/gorm"
@@ -18,7 +19,7 @@ func NewGormRepository(db *gorm.DB) *GormRepository {
 }
 
 func (r *GormRepository) GetAllProjectByUser(userId int) (projects []project.Project, err error) {
-	err = r.DB.WithContext(context.Background()).Where("client_id = ?", userId).Find(&projects).Error
+	err = r.DB.WithContext(context.Background()).Where("freelancer_id = ?", userId).Find(&projects).Error
 	return projects, err
 }
 
@@ -39,4 +40,15 @@ func (r *GormRepository) UpdateProject(input project.Project) (project project.P
 
 func (r *GormRepository) DeleteProject(projectId int) (err error) {
 	return r.WithContext(context.Background()).Where("id = ?", projectId).Delete(&project.Project{}).Error
+}
+
+func (r *GormRepository) PatchProject(projectId int, status string) (err error) {
+	now := time.Now()
+	return r.DB.WithContext(context.Background()).
+		Model(&project.Project{}).
+		Where("id = ?", projectId).
+		Updates(map[string]interface{}{
+			"status":       status,
+			"submitted_at": now,
+		}).Error
 }

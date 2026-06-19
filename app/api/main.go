@@ -12,6 +12,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	jobCTRL "github.com/nuninnih/service_marketplace/app/api/controller/job"
+	projectCTRL "github.com/nuninnih/service_marketplace/app/api/controller/project"
 	proposalCRTL "github.com/nuninnih/service_marketplace/app/api/controller/proposal"
 	userCTRL "github.com/nuninnih/service_marketplace/app/api/controller/user"
 	"github.com/nuninnih/service_marketplace/app/api/router"
@@ -20,6 +21,7 @@ import (
 	proposalRepo "github.com/nuninnih/service_marketplace/repository/proposal"
 	userRepo "github.com/nuninnih/service_marketplace/repository/user"
 	jobSvc "github.com/nuninnih/service_marketplace/service/job"
+	projectSvc "github.com/nuninnih/service_marketplace/service/project"
 	proposalSvc "github.com/nuninnih/service_marketplace/service/proposal"
 	userSvc "github.com/nuninnih/service_marketplace/service/user"
 	"github.com/nuninnih/service_marketplace/util/db"
@@ -83,6 +85,8 @@ func main() {
 	jobController := jobCTRL.NewController(logger, jobService)
 
 	projectRepository := projectRepo.NewGormRepository(db)
+	projectService := projectSvc.NewService(logger, projectRepository)
+	projectController := projectCTRL.NewController(logger, projectService)
 
 	proposalRepository := proposalRepo.NewGormRepository(db)
 	proposalService := proposalSvc.NewService(logger, proposalRepository, jobRepository, projectRepository)
@@ -94,6 +98,7 @@ func main() {
 		userController,
 		jobController,
 		proposalController,
+		projectController,
 	)
 
 	logger.Info("http server started on :" + os.Getenv("PORT"))

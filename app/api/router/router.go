@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/nuninnih/service_marketplace/app/api/controller/job"
+	"github.com/nuninnih/service_marketplace/app/api/controller/project"
 	"github.com/nuninnih/service_marketplace/app/api/controller/proposal"
 	"github.com/nuninnih/service_marketplace/app/api/controller/user"
 	"github.com/nuninnih/service_marketplace/app/api/middleware"
@@ -14,6 +15,7 @@ func RegisterPath(
 	ctrlUser *user.Controller,
 	ctrlJob *job.Controller,
 	ctrlProp *proposal.Controller,
+	ctrlProj *project.Controller,
 
 ) {
 	jwtMiddleware := middleware.JWTMiddleware(jwtSecret)
@@ -51,23 +53,8 @@ func RegisterPath(
 	proposalEndpoint := e.Group("/proposals", jwtMiddleware)
 	proposalEndpoint.PATCH("/:id/accept", ctrlProp.ApproveProposal, clientAccess) //client
 
-	// projectEndpoint := e.Group("/projects", jwtMiddleware)
+	projectEndpoint := e.Group("/projects", jwtMiddleware)
 	// projectEndpoint.GET("/my")           // freelancer
-	// projectEndpoint.PATCH("/:id/submit") // freelancer
-	// projectEndpoint.POST("/:id/pay")     //client
-
-	// client endpoint
-	// POST /jobs X
-	// GET /jobs/my X
-	// GET /jobs/:id/proposals X
-	// POST /proposals/:id/accept -- PATCH aja kayaknya X
-	// POST /projects/:id/pay
-
-	// freelancer endpoint
-	// GET /jobs
-	// GET /jobs/:id X
-	// POST /jobs/:id/proposals X
-	// GET /my/projects
-	// PATCH /projects/:id/submit
-
+	projectEndpoint.PATCH("/:id/submit", ctrlProj.UpdateStatusProject, freelancerAccess) // freelancer
+	// projectEndpoint.PACTH("/:id/pay")     //client
 }
